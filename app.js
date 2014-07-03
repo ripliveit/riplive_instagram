@@ -17,17 +17,12 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
-//app.set('instagram', instagram)
-
 if (app.get('env') === 'development') {
   app.use(express.errorHandler());
 }
 
-app.get('/auth', routes.auth);
-app.get('/authorize', routes.authorize);
 app.get('/photos', routes.photos);
+app.post('/photos', routes.setPhoto);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Instagram parser up and running on ' + app.get('port'));
