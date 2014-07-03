@@ -1,12 +1,15 @@
-var express = require('express');
-var routes = require('./routes');
-var http = require('http');
-var path = require('path');
-var app = module.exports = express();
+var express   = require('express');
+var path      = require('path');
+var instagram = require('instagram-node-lib');
+var app       = module.exports = express();
+var server    = require('http').Server(app);
+var io        = require('socket.io')(server);
 
-
-// all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3001);
+app.set('clientId', 'cd68515ce8c8486eacfb4b639008b8d7');
+app.set('clientSecret', '3e66f8a7eb1d4efa906ab8916b29e9c0');
+app.set('instagram', instagram);
+app.set('io', io);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 app.use(express.favicon());
@@ -17,13 +20,11 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-if (app.get('env') === 'development') {
-  app.use(express.errorHandler());
-}
+var routes    = require('./routes');
 
 app.get('/photos', routes.photos);
 app.post('/photos', routes.setPhoto);
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Instagram parser up and running on ' + app.get('port'));
+server.listen(app.get('port'), function(){
+  console.log('Instagrams parser up and running on ' + app.get('port'));
 });
