@@ -10,27 +10,17 @@ server.listen(3000, function() {
 });
 
 function Message() {
-  var self     = this;
-  var uid      = -1;
-  this.sockets = [];
-
   this.setConnectionHandler = function(cb) {
     if (typeof cb !== 'function') {
       throw new Error('Pleas provice a function callback to be used as handler');
     }
 
-    io.on('connection', function(socket) {
-      var inc = ++uid;
-      uid = inc;
-      console.log(inc);
-      self.sockets[inc] = socket;
-      //console.log(self.sockets);
-      cb(socket);
-    });  
+    io.on('connection', cb);  
   }
 
   this.sendMessage = function(name, data) {
-    self.sockets[uid].emit(name, data);
+    console.log(io.sockets);
+    io.sockets.emit(name, data);
   };
 
   this.onMessage = function(name, cb) {
@@ -49,15 +39,13 @@ message.setConnectionHandler(function(socket) {
   socket.on('message', function(data) {
     console.log(data);
   });
-
-  //socket.emit('message', {data : 'here iam'});
 });
 
 message.sendMessage('message', {data : 'data from Server'});
 
 var clientSocket = client(host);
 clientSocket.emit('message', {
-  data : 'data'
+  data : 'data from Client'
 });
 
 clientSocket.on('message', function(data) {
