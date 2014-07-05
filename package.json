@@ -8,6 +8,12 @@
   "dependencies": {
     "express": "3.4.8",
     "socket.io": "1.0.6",
-    "instagram-node-lib": "*"
+    "instagram-node-lib": "*",
+    "install": "~0.1.7",
+    "npm": "~1.4.20"
+  },
+  "devDependencies": {
+    "expect.js": "~0.3.1",
+    "socket.io-client" : "*"
   }
 }

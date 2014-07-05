@@ -1,13 +1,19 @@
 var express   = require('express');
 var path      = require('path');
-var instagram = require('instagram-node-lib');
 var app       = module.exports = express();
 var server    = require('http').Server(app);
 var io        = require('socket.io')(server);
+var Instagram = require(__dirname  + '/daos/instagram.js');
+var id        = 'cd68515ce8c8486eacfb4b639008b8d7';
+var secret    = '3e66f8a7eb1d4efa906ab8916b29e9c0';
+var url       = 'http://onair.riplive.it';
+var callback  = 'http://onair.riplive.it/photos';
+var instagram = new Instagram(id, secret);
 
+instagram.setRedirectUri(url).setCallBackUrl(callback);
+
+app.disable('x-powered-by');
 app.set('port', process.env.PORT || 3001);
-app.set('clientId', 'cd68515ce8c8486eacfb4b639008b8d7');
-app.set('clientSecret', '3e66f8a7eb1d4efa906ab8916b29e9c0');
 app.set('instagram', instagram);
 app.set('io', io);
 app.set('views', path.join(__dirname, 'views'));
