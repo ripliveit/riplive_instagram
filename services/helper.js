@@ -41,7 +41,7 @@ function Helper(io, instagram, request) {
    *
    * @param  {string} url
    * @param  {string} callbackUrl
-   * @param  {array} tags
+   * @param  {Array} tags
    * @return {undefined}
    */
   this.init = function(url, callbackUrl, tags) {
@@ -71,10 +71,21 @@ function Helper(io, instagram, request) {
   };
 
   /**
+   * Set auth handshake with instagram.
+   * 
+   * @param  {Function} req
+   * @param  {Function} res
+   * @return {Object}
+   */
+  this.handshake = function(req, res) {
+    return self.instagram.handshake(req, res);
+  };
+
+  /**
    * First retrieve photos from Instagram.
    * Than broadcasts to all connected clients.
    *
-   * @param  {array}   data
+   * @param  {Array}   data
    * @param  {Function} cb
    * @return {undefined}
    */

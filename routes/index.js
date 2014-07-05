@@ -2,7 +2,7 @@ var app       = require(__dirname + '/../app.js');
 var helper    = app.get('helper');
 
 exports.photos = function(req, res, next) {
-  var handshake = instagram.handshake(req, res);
+  var handshake = helper.handshake(req, res);
 };
 
 exports.setPhoto = function(req, res, next) {
