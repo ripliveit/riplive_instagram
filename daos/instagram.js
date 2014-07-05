@@ -96,8 +96,7 @@ function Instagram(clientId, clientSecret) {
       object_id: tag,
       aspect: 'media',
       callback_url: self.callBackUrl,
-      type: 'subscription',
-      id: '#'
+      type: 'subscription'
     });
   };
 

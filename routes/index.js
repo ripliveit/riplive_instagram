@@ -22,7 +22,7 @@ exports.photos = function(req, res, next) {
 exports.setPhoto = function(req, res, next) {
   var data = req.body;
   console.log(data);
-  
+
   data.forEach(function(tag) {
       var url = 'https://api.instagram.com/v1/tags/' + tag.object_id + '/media/recent?client_id=CLIENT_ID';
       //sendMessage(url);
