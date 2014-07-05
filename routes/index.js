@@ -1,9 +1,12 @@
 var app       = require(__dirname + '/../app.js');
 var io        = app.get('io');
 var instagram = app.get('instagram');
-instagram.subscribeToTag('ripliveit', function(data) {
-  console.log('paolino');
-  console.log(data);
+
+instagram.subscribeToTag('ripliveit');
+instagram.subscribeToTag('rugbysound');
+
+instagram.getRecentMediaByTag('ripliveit', function(data) {
+  //console.log(data);
 });
 
 
@@ -18,7 +21,8 @@ exports.photos = function(req, res, next) {
 
 exports.setPhoto = function(req, res, next) {
   var data = req.body;
-
+  console.log(data);
+  
   data.forEach(function(tag) {
       var url = 'https://api.instagram.com/v1/tags/' + tag.object_id + '/media/recent?client_id=CLIENT_ID';
       //sendMessage(url);
