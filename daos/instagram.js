@@ -91,13 +91,15 @@ function Instagram(clientId, clientSecret) {
       throw new Error('Please define a tag parameter');
     }
 
-    return api.subscriptions.subscribe({
+    api.subscriptions.subscribe({
       object: 'tag',
       object_id: tag,
       aspect: 'media',
       callback_url: self.callBackUrl,
       type: 'subscription'
     });
+
+    return this;
   };
 
   /**
@@ -109,7 +111,7 @@ function Instagram(clientId, clientSecret) {
    */
   this.getRecentMediaByTag = function(tag, cb) {
     if (typeof tag === 'undefined') {
-      throw new Error('Please spec')
+      throw new Error('Please provide a valid callback function');
     }
 
     api.tags.recent({

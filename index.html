@@ -1,0 +1,12 @@
+<html>
+<head>
+    <title>IO</title>
+    <script src="https://cdn.socket.io/socket.io-1.0.6.js"></script>
+    <script>
+        var socket = io('http://localhost:3001');
+        socket.on('photos', function(data) {
+            console.log(data);
+        });
+    </script>
+</head>
+</html>
