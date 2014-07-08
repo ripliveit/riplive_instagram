@@ -31,12 +31,22 @@ describe('Helper Class', function() {
     expect(helper).to.have.property('instagram');
     expect(helper).to.have.property('request');
     expect(helper).to.have.property('init');
+    expect(helper).to.have.property('getRecentMedia');
     expect(helper).to.have.property('sendPhotoToClients');
   });
 
   describe('#init', function() {
     it('is used to set socket.io connection handler and Instagram Subscription', function() {
       helper.init(url, callback, tags);
+    });
+  });
+
+  describe('#getRecentMedia', function() {
+    it('should retrieve an array of object from Instagram', function(done) {
+      helper.getRecentMedia(function(data) {
+        expect(data).to.be.an('array');
+        done();
+      });
     });
   });
 

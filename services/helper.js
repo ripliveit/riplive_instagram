@@ -64,8 +64,30 @@ function Helper(io, instagram, request) {
     });
 
     self.io.on('connection', function(socket) {
-      self.instagram.getRecentMediaByTag('ripliveit', function(data) {
+      self.getRecentMedia(function(data) {
         socket.emit('photos', data);
+      });
+    });
+  };
+
+  /**
+   * Return a list of recent media.
+   * 
+   * @param  {Function} cb [description]
+   * @return {[type]}      [description]
+   */
+  this.getRecentMedia = function(cb){
+    self.instagram.getRecentMediaByTag('ripliveit', function(first) {
+      self.instagram.getRecentMediaByTag('rugbysound', function(second) {
+        first = first.concat(second);
+
+        cb(first.sort(function(a, b) {
+          if(a.created_time > b.created_time) {
+            return 1;
+          } else {
+            return -1;
+          }
+        }));
       });
     });
   };
