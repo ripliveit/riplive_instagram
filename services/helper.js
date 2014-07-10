@@ -129,7 +129,7 @@ function Helper(io, instagram, request) {
 
         if (res.statusCode == 200) {
           var toSend = body.data[0];
-          io.sockets.emit('photos', toSend);
+          io.sockets.emit('photo', toSend);
           cb(null, toSend);
         }
       });
