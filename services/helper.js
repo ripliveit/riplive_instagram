@@ -79,7 +79,7 @@ function Helper(io, instagram, request) {
   this.getRecentMedia = function(cb){
     self.instagram.getRecentMediaByTag('ripliveit', function(first) {
       self.instagram.getRecentMediaByTag('rugbysound', function(second) {
-        data = first.concat(second);
+        var data = first.concat(second);
 
         cb(data);
       });
