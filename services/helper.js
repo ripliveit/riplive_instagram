@@ -79,15 +79,9 @@ function Helper(io, instagram, request) {
   this.getRecentMedia = function(cb){
     self.instagram.getRecentMediaByTag('ripliveit', function(first) {
       self.instagram.getRecentMediaByTag('rugbysound', function(second) {
-        first = first.concat(second);
+        data = first.concat(second);
 
-        cb(first.sort(function(a, b) {
-          if(a.created_time > b.created_time) {
-            return 1;
-          } else {
-            return -1;
-          }
-        }));
+        cb(data);
       });
     });
   };
