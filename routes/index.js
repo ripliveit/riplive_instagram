@@ -1,4 +1,4 @@
-var app       = require(__dirname + '/../app.js');
+var app       = require(__dirname + '/../server.js');
 var helper    = app.get('helper');
 
 exports.photos = function(req, res, next) {
