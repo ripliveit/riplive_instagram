@@ -116,8 +116,8 @@ function Instagram(clientId, clientSecret) {
 
     api.tags.recent({
       name: tag,
-      complete: function(data) {
-        return cb(data);
+      complete: function(data, pagination) {
+        return cb(data, pagination);
       }
     });
   };

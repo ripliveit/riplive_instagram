@@ -12,6 +12,7 @@ var tags      = ['ripliveit', 'rugbysound'];
 var Instagram = require(__dirname  + '/../daos/instagram.js');
 var Helper    = require(__dirname  + '/../services/helper.js');
 var instagram = new Instagram(id, secret);
+
 var mock = [{
   changed_aspect: 'media',
   object: 'tag',
@@ -21,7 +22,13 @@ var mock = [{
   data: {}
 }];
 
+var endpointData = {
+  url : 'https://api.instagram.com/v1/tags/ripliveit/media/recent?name=ripliveit&client_id=cd68515ce8c8486eacfb4b639008b8d7&max_tag_id=1405121618968950'
+};
+
 describe('Helper Class', function() {
+  this.timeout(3000);
+
   server.listen(3001);
   var helper = new Helper(io, instagram, request);
 
@@ -31,7 +38,9 @@ describe('Helper Class', function() {
     expect(helper).to.have.property('instagram');
     expect(helper).to.have.property('request');
     expect(helper).to.have.property('init');
+    expect(helper).to.have.property('handshake');
     expect(helper).to.have.property('getRecentMedia');
+    expect(helper).to.have.property('getMedia');
     expect(helper).to.have.property('sendPhotoToClients');
   });
 
@@ -41,10 +50,25 @@ describe('Helper Class', function() {
     });
   });
 
+  describe('#getMedia', function() {
+    it('should retrieve an object with medias data from a specific Instagram Api endpoint', function(done) {
+      helper.getMedia(endpointData, function(data) {
+        expect(data).to.be.an('object');
+        expect(data).to.have.property('pagination');
+        expect(data).to.have.property('data');
+        expect(data.data).to.be.an('array');
+        done();
+      })
+    });
+  });
+
   describe('#getRecentMedia', function() {
     it('should retrieve an array of object from Instagram', function(done) {
       helper.getRecentMedia(function(data) {
-        expect(data).to.be.an('array');
+        expect(data).to.be.an('object');
+        expect(data).to.have.property('pagination');
+        expect(data).to.have.property('data');
+        expect(data.data).to.be.an('array');
         done();
       });
     });

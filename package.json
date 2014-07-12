@@ -1,6 +1,11 @@
 {
   "name": "riplive_instagram_api",
-  "version": "0.0.1",
+  "author": "Gabriele D'Arrigo - @acirdesign",
+  "keywords": [
+    "webradio",
+    "websocket",
+    "instagram"
+  ],
   "private": true,
   "scripts": {
     "start": "node app.js"

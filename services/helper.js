@@ -63,38 +63,74 @@ function Helper(io, instagram, request) {
       self.instagram.subscribeToTag(tag);
     });
 
-    self.io.on('connection', function(socket) {
-      self.getRecentMedia(function(data) {
-        socket.emit('photos', data);
-      });
-    });
+    self.io.on('connection', self.socketHandler);
   };
 
-  /**
-   * Return a list of recent media.
-   * 
-   * @param  {Function} cb [description]
-   * @return {[type]}      [description]
-   */
-  this.getRecentMedia = function(cb){
-    self.instagram.getRecentMediaByTag('ripliveit', function(first) {
-      self.instagram.getRecentMediaByTag('rugbysound', function(second) {
-        var third = first.concat(second);
+  this.socketHandler = function(socket) {
+    socket.on('getMedia', self.getMedia);
 
-        cb(third);
-      });
+    self.getRecentMedia(function(data, pagination) {
+      socket.emit('photos', data);
     });
   };
 
   /**
    * Set auth handshake with instagram.
-   * 
+   *
    * @param  {Function} req
    * @param  {Function} res
    * @return {Object}
    */
   this.handshake = function(req, res) {
     return self.instagram.handshake(req, res);
+  };
+
+  /**
+   * Return a list of recent media.
+   *
+   * @param  {Function} cb [description]
+   * @return {[type]}      [description]
+   */
+  this.getRecentMedia = function(cb) {
+    self.instagram.getRecentMediaByTag('ripliveit', function(first, pagination) {
+      self.instagram.getRecentMediaByTag('rugbysound', function(second) {
+        var third = first.concat(second);
+
+        cb({
+          pagination: pagination,
+          data: third
+        });
+      });
+    });
+  };
+
+  /**
+   * Get media from a specific 
+   * Instagram API URL.
+   * 
+   * @param  {Object} data
+   * @param  {Function} cb
+   * @return {undefined}
+   */
+  this.getMedia = function(data, cb) {
+    if (!('url' in data)) {
+      return false;
+    }
+
+    self.request({
+      url: data.url,
+      json: true
+    }, function(err, res, body) {
+      if (err) return false;
+
+      if (res.statusCode == 200) {
+        io.sockets.emit('photos', body);
+
+        if (typeof cb !== 'undefined') {
+          cb(body);
+        }
+      }
+    });
   };
 
   /**

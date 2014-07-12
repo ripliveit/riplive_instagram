@@ -13,6 +13,7 @@ var Instagram  = require(__dirname + '/daos/instagram.js');
 var Helper     = require(__dirname + '/services/helper.js');
 var instagram  = new Instagram(id, secret);
 var helper     = new Helper(io, instagram, request);
+helper.init(url, callback, tags);
 
 app.disable('x-powered-by');
 app.set('port', process.env.PORT || 3001);
@@ -28,12 +29,7 @@ if (app.get('env') === 'development') {
   app.use(express.logger('dev'));
 }
 
-helper.init(url, callback, tags);
 var routes = require('./routes');
-
-app.get('/', function(req, res) {
-  res.sendfile('index.html');
-});
 
 app.get('/photos', routes.photos);
 app.post('/photos', routes.setPhoto);
