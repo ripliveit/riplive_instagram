@@ -4,11 +4,14 @@ var app        = module.exports = express();
 var server     = require('http').Server(app);
 var io         = require('socket.io')(server);
 var request    = require('request');
-var id         = 'cd68515ce8c8486eacfb4b639008b8d7';
-var secret     = '3e66f8a7eb1d4efa906ab8916b29e9c0';
-var url        = 'http://onair.riplive.it';
-var callback   = 'http://onair.riplive.it/photos';
-var tags       = ['ripliveit', 'rugbysound'];
+var config     = process.env.NODE_END === 'production' ? 
+					require(__dirname + '/config/production.js') : 
+					require(__dirname + '/config/development.js');
+var id         = config.id;
+var secret     = config.secret;
+var url        = config.url;
+var callback   = config.callback;
+var tags       = config.tags;
 var Instagram  = require(__dirname + '/daos/instagram.js');
 var Helper     = require(__dirname + '/services/helper.js');
 var instagram  = new Instagram(id, secret);
