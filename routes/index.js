@@ -15,7 +15,7 @@ exports.photos = function(req, res, next) {
 
 /**
  * Send photo's data to all connected
- * client when instagram POST a photo.
+ * client when Instagram POST photo's data.
  * 
  * @param  {Object}   req
  * @param  {Object}   res

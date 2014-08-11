@@ -4,7 +4,7 @@ var app        = module.exports = express();
 var server     = require('http').Server(app);
 var io         = require('socket.io')(server);
 var request    = require('request');
-var config     = process.env.NODE_END === 'production' ? 
+var config     = process.env.NODE_ENV === 'production' ? 
 					require(__dirname + '/config/production.js') : 
 					require(__dirname + '/config/development.js');
 var id         = config.id;

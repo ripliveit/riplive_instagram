@@ -1,6 +1,6 @@
 /**
  * A class that implements business logic
- * used to intercat with all socket.io clients and
+ * used to interact with all socket.io clients and
  * with instagram subscriptions.
  *
  * @param {Object} io        Socket Io server.
@@ -66,6 +66,12 @@ function Helper(io, instagram, request) {
     self.io.on('connection', self.socketHandler);
   };
 
+  /**
+   * The websocket's handler.
+   * 
+   * @param  {Object} socket
+   * @return {undefined}
+   */
   this.socketHandler = function(socket) {
     socket.on('getMedia', self.getMedia);
 
@@ -88,8 +94,8 @@ function Helper(io, instagram, request) {
   /**
    * Return a list of recent media.
    *
-   * @param  {Function} cb [description]
-   * @return {[type]}      [description]
+   * @param  {Function} cb
+   * @return {undefined}
    */
   this.getRecentMedia = function(cb) {
     self.instagram.getRecentMediaByTag('ripliveit', function(first, pagination) {

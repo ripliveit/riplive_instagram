@@ -110,7 +110,7 @@ function Instagram(clientId, clientSecret) {
    * @return {undefined}
    */
   this.getRecentMediaByTag = function(tag, cb) {
-    if (typeof tag === 'undefined') {
+    if (typeof cb === 'undefined') {
       throw new Error('Please provide a valid callback function');
     }
 
