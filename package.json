@@ -1,7 +1,7 @@
 {
   "name": "riplive_instagram_api",
   "author": "Gabriele D'Arrigo - @acirdesign",
-  "version" : "1.0.1",
+  "version": "1.0.1",
   "keywords": [
     "webradio",
     "websocket",
@@ -15,10 +15,12 @@
     "express": "3.4.8",
     "socket.io": "1.0.6",
     "instagram-node-lib": "*",
-    "request" : "*"
+    "request": "*"
   },
   "devDependencies": {
+    "grunt": "~0.4.5",
     "expect.js": "~0.3.1",
-    "socket.io-client" : "*"
+    "socket.io-client": "*",
+    "grunt-ssh": "~0.11.2"
   }
 }
