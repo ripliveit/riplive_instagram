@@ -1,9 +1,11 @@
 var config = {
-  id: 'cd68515ce8c8486eacfb4b639008b8d7',
-  secret: '3e66f8a7eb1d4efa906ab8916b29e9c0',
-  url: 'http://localhost:3001',
-  callback: 'http://localhost:3001/photos',
-  tags: ['ripliveit']
+    id: process.env.INSTAGRAM_ID,
+    secret: process.env.INSTAGRAM_SECRET,
+    url: 'http://onair.riplive.it',
+    callback: 'http://onair.riplive.it/photos',
+    tags: [
+        'ripliveit'
+    ]
 };
 
 module.exports = config;

@@ -4,9 +4,7 @@ var app        = module.exports = express();
 var server     = require('http').Server(app);
 var io         = require('socket.io')(server);
 var request    = require('request');
-var config     = process.env.NODE_ENV === 'production' ? 
-					require(__dirname + '/config/production.js') : 
-					require(__dirname + '/config/development.js');
+var config     = require('config');
 var id         = config.id;
 var secret     = config.secret;
 var url        = config.url;
@@ -29,7 +27,7 @@ app.use(express.methodOverride());
 app.use(app.router);
 
 if (app.get('env') === 'development') {
-  app.use(express.logger('dev'));
+    app.use(express.logger('dev'));
 }
 
 var routes = require('./routes');
@@ -38,5 +36,5 @@ app.get('/photos', routes.photos);
 app.post('/photos', routes.setPhoto);
 
 server.listen(app.get('port'), function() {
-  console.log('Instagrams parser up and running on ' + app.get('port'));
+    console.log('Instagrams parser up and running on ' + app.get('port'));
 });
