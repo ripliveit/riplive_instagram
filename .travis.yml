@@ -5,4 +5,4 @@ node_js:
   - "0.10"
   - "iojs"
 before_script: npm install
-after_script: SSH_HOST SSH_USER SSH_PASSWORD SSH_PORT grunt deploy
+after_script: grunt deploy
