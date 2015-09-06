@@ -11,14 +11,8 @@ Clone the repository, than install all application's dependencies:
 
 Launch all unit tests with:
 
-	$ mocha -R spec tests
+	$ npm run test
 
 Run the application:
 
 	$ node server.js
-
-##  Continuous integration and Deployment
-
-All builds, tests and deployment are running against a Jenkins server available at
-
-build.riplive.it:8080
