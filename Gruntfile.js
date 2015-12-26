@@ -13,7 +13,7 @@ module.exports = function(grunt) {
                 command: [
                     'cd /var/www/riplive_instagram',
                     'git pull origin master',
-                    'npm install',
+                    'npm install --dev',
                     'forever restartall',
                     'forever list'
                 ].join(' && '),
