@@ -15,7 +15,7 @@ helper.init(config.url, config.callback, config.tags);
 
 app.enable('trust proxy');
 app.disable('x-powered-by');
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 3002);
 app.set('io', io);
 app.set('instagram', instagram);
 app.set('helper', helper);
