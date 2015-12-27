@@ -16,7 +16,9 @@ var instagram  = new Instagram(id, secret);
 var helper     = new Helper(io, instagram, request);
 helper.init(url, callback, tags);
 
+app.enable('trust proxy');
 app.disable('x-powered-by');
+app.disable('view cache');
 app.set('port', process.env.PORT || 3001);
 app.set('io', io);
 app.set('instagram', instagram);
