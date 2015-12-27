@@ -5,20 +5,16 @@ var server     = require('http').Server(app);
 var io         = require('socket.io')(server);
 var request    = require('request');
 var config     = require('config');
-var id         = config.id;
-var secret     = config.secret;
-var url        = config.url;
-var callback   = config.callback;
-var tags       = config.tags;
 var Instagram  = require(__dirname + '/daos/instagram.js');
 var Helper     = require(__dirname + '/services/helper.js');
-var instagram  = new Instagram(id, secret);
+
+var instagram  = new Instagram(config.id, config.secret);
 var helper     = new Helper(io, instagram, request);
-helper.init(url, callback, tags);
+
+helper.init(config.url, config.callback, config.tags);
 
 app.enable('trust proxy');
 app.disable('x-powered-by');
-app.disable('view cache');
 app.set('port', process.env.PORT || 3001);
 app.set('io', io);
 app.set('instagram', instagram);
@@ -37,6 +33,6 @@ var routes = require('./routes');
 app.get('/photos', routes.photos);
 app.post('/photos', routes.setPhoto);
 
-server.listen(app.get('port'), function() {
+server.listen(app.get('port'), () => {
     console.log('Instagrams parser up and running on ' + app.get('port'));
 });
